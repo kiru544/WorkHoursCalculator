@@ -642,29 +642,22 @@ tbody td.slot.bonus-col:hover {
 
 /* ---- Mobile fine-tuning ---- */
 @media (max-width: 720px) {
-  body { padding: 24px 12px 60px; }
-  .container { gap: 18px; }
+  body { padding: 0; }
+  .container { gap: 8px; }
 
-  /* Compress mobile: drop the eyebrow, big title, and hint */
+  /* Compress mobile: drop the eyebrow, big title, hint, and totals strip */
   header .eyebrow,
   header h1,
-  .hint { display: none; }
+  .hint,
+  .totals { display: none; }
 
-  header { margin-bottom: 0; }
-  .subtitle { margin-top: 0; font-size: 13px; }
+  header { margin-bottom: 0; padding: 12px 12px 0; }
+  .subtitle { margin-top: 0; font-size: 12px; }
 
-  .totals {
-    width: 100%;
-  }
-  .total-cell {
-    flex: 1;
-    min-width: 0;
-    padding: 12px 8px;
-  }
-  .total-value { font-size: 20px; }
-  .total-value .unit { font-size: 10px; }
-  .total-label { font-size: 8px; }
+  .controls { gap: 10px; }
+  .checkbox-wrap { padding: 8px 14px; }
+  .checkbox-label { font-size: 13px; }
+  .save-btn { padding: 12px 28px; font-size: 15px; width: calc(100% - 24px); max-width: 320px; }
 
-  .checkbox-label { font-size: 14px; }
-  .save-btn { padding: 14px 32px; font-size: 16px; width: 100%; max-width: 320px; }
+  .output { padding: 0 12px; }
 }
