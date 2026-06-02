@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work Hours Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="eyebrow">Welcome to hours calculator</div>
+    <h1>Work Hours <span class="amp">&amp;</span> Bonus</h1>
+    <p class="subtitle">Click cells to log time. Click a day header to mark it as holidays&mdash; weekends are flagged by default.</p>
+  </header>
+
+  <div class="totals">
+    <div class="total-cell">
+      <div class="total-label">Weekday</div>
+      <div class="total-value"><span id="weekday-total">0.0</span><span class="unit">hrs</span></div>
+    </div>
+    <div class="total-cell">
+      <div class="total-label">Bonus</div>
+      <div class="total-value"><span id="bonus-total">0.0</span><span class="unit">hrs</span></div>
+    </div>
+    <div class="total-cell">
+      <div class="total-label">Total</div>
+      <div class="total-value"><span id="grand-total">0.0</span><span class="unit">hrs</span></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="hours-table">
+      <thead>
+        <tr id="header-row"></tr>
+      </thead>
+      <tbody id="body"></tbody>
+    </table>
+  </div>
+
+  <p class="hint">Drag <span class="dot">&middot;</span> Toggle <span class="dot">&middot;</span> Tap day name to flag</p>
+
+  <div class="controls">
+    <label class="checkbox-wrap">
+      <input type="checkbox" id="detailed-toggle">
+      <span class="checkbox-box"></span>
+      <span class="checkbox-label">Save detailed per-day breakdown</span>
+    </label>
+
+    <button class="save-btn" id="save-btn">
+      Calculate <span class="arrow">&rarr;</span>
+    </button>
+  </div>
+
+  <div class="output" id="output">
+    <div class="output-header">
+      <span class="output-title">Result &mdash; copied to clipboard</span>
+      <span class="copy-status" id="copy-status">Copied</span>
+    </div>
+    <textarea id="output-text" readonly></textarea>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
