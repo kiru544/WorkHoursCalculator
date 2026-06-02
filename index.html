@@ -56,7 +56,15 @@
         <span class="star">&#9733;</span><span>Bonus</span>
       </button>
     </div>
-    <div class="mobile-slots" id="mobile-slots"></div>
+    <div class="mobile-slots-wrap">
+      <div class="custom-scrollbar">
+        <div class="scrollbar-track" id="scrollbar-track">
+          <div class="scrollbar-progress" id="scrollbar-progress"></div>
+          <div class="scrollbar-thumb" id="scrollbar-thumb"></div>
+        </div>
+      </div>
+      <div class="mobile-slots" id="mobile-slots"></div>
+    </div>
   </div>
 
   <p class="hint desktop-only">Drag <span class="dot">&middot;</span> Toggle <span class="dot">&middot;</span> Tap day name to flag as holiday</p>
@@ -69,7 +77,7 @@
     </label>
 
     <button class="save-btn" id="save-btn">
-      Calculate <span class="arrow">&rarr;</span>
+      Save calculation <span class="arrow">&rarr;</span>
     </button>
   </div>
 

@@ -88,12 +88,73 @@ function renderMobileSlots() {
     slot.dataset.slot = i;
     if (isSelected(day, i)) slot.classList.add('selected');
     if (isBonus(day)) slot.classList.add('bonus-col');
-    slot.innerHTML =
-      `<span>${formatTime(i)}</span>` +
-      `<span class="mobile-slot-end">${formatTime(i + 1)}</span>`;
+    slot.innerHTML = `<span>${formatTime(i)}</span>`;
     mobileSlotsContainer.appendChild(slot);
   }
+  // Refresh scrollbar after the slots re-render (scrollTop resets to 0)
+  if (typeof updateScrollbar === 'function') {
+    requestAnimationFrame(updateScrollbar);
+  }
 }
+
+/* ---------- Custom scrollbar for mobile slots ---------- */
+const trackEl = document.getElementById('scrollbar-track');
+const progressEl = document.getElementById('scrollbar-progress');
+const thumbEl = document.getElementById('scrollbar-thumb');
+const THUMB_SIZE = 14;
+
+function updateScrollbar() {
+  const slots = mobileSlotsContainer;
+  const scrollMax = slots.scrollHeight - slots.clientHeight;
+  if (scrollMax <= 0) {
+    thumbEl.style.top = '0px';
+    progressEl.style.height = '0px';
+    return;
+  }
+  const ratio = Math.max(0, Math.min(1, slots.scrollTop / scrollMax));
+  const trackH = trackEl.clientHeight;
+  const travel = Math.max(0, trackH - THUMB_SIZE);
+  const thumbTop = ratio * travel;
+  thumbEl.style.top = thumbTop + 'px';
+  progressEl.style.height = (thumbTop + THUMB_SIZE / 2) + 'px';
+}
+
+mobileSlotsContainer.addEventListener('scroll', updateScrollbar, { passive: true });
+window.addEventListener('resize', updateScrollbar);
+
+/* Drag the thumb to scroll the list */
+let scrollDrag = null;
+
+thumbEl.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  try { thumbEl.setPointerCapture(e.pointerId); } catch (err) {}
+  thumbEl.classList.add('dragging');
+  scrollDrag = {
+    startY: e.clientY,
+    startScroll: mobileSlotsContainer.scrollTop,
+    trackH: trackEl.clientHeight,
+    scrollMax: mobileSlotsContainer.scrollHeight - mobileSlotsContainer.clientHeight
+  };
+});
+
+thumbEl.addEventListener('pointermove', e => {
+  if (!scrollDrag) return;
+  const dy = e.clientY - scrollDrag.startY;
+  const travel = Math.max(1, scrollDrag.trackH - THUMB_SIZE);
+  const dScroll = (dy / travel) * scrollDrag.scrollMax;
+  const next = Math.max(0, Math.min(scrollDrag.scrollMax, scrollDrag.startScroll + dScroll));
+  mobileSlotsContainer.scrollTop = next;
+});
+
+function endScrollDrag(e) {
+  if (!scrollDrag) return;
+  try { thumbEl.releasePointerCapture(e.pointerId); } catch (err) {}
+  thumbEl.classList.remove('dragging');
+  scrollDrag = null;
+}
+thumbEl.addEventListener('pointerup', endScrollDrag);
+thumbEl.addEventListener('pointercancel', endScrollDrag);
 
 /* ---------- Mutators: sync both views ---------- */
 function setSelected(day, slot, value) {

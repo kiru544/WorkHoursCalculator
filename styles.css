@@ -361,27 +361,89 @@ tbody td.slot.bonus-col:hover {
   color: var(--bg);
 }
 
-.mobile-slots {
+.mobile-slots-wrap {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.custom-scrollbar {
+  flex-shrink: 0;
+  width: 24px;
+  margin: 10px 0 10px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  position: relative;
+  background: var(--bg);
+}
+
+.scrollbar-track {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: var(--line);
+  border-radius: 1px;
+}
+
+.scrollbar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 1px;
+  height: 0;
+  pointer-events: none;
+  transition: background 0.15s;
+}
+
+.scrollbar-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--ink);
+  border-radius: 50%;
+  cursor: grab;
+  top: 0;
+  z-index: 2;
+  touch-action: none;
+  transition: background 0.15s, transform 0.1s;
+  transform-origin: center;
+}
+
+.scrollbar-thumb:hover {
+  background: var(--bonus);
+}
+
+.scrollbar-thumb:active,
+.scrollbar-thumb.dragging {
+  cursor: grabbing;
+  background: var(--bonus);
+  transform: translateX(-50%) scale(1.15);
+}
+
+.scrollbar-thumb.dragging ~ .scrollbar-progress,
+.scrollbar-thumb:active ~ * .scrollbar-progress {
+  background: var(--bonus);
+}
+
+.mobile-slots {
+  flex: 1;
+  min-width: 0;
   max-height: 60vh;
   overflow-y: auto;
   user-select: none;
   -webkit-overflow-scrolling: touch;
-  /* Flip scrollbar to the left side */
-  direction: rtl;
-  scrollbar-width: thin;
-  scrollbar-color: var(--ink) var(--bg-soft);
+  scrollbar-width: none; /* hide native */
 }
 
 .mobile-slots::-webkit-scrollbar {
-  width: 6px;
-}
-.mobile-slots::-webkit-scrollbar-track {
-  background: var(--bg-soft);
-}
-.mobile-slots::-webkit-scrollbar-thumb {
-  background: var(--ink);
+  display: none;
 }
 
 .mobile-slot {
