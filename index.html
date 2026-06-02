@@ -15,7 +15,8 @@
   <header>
     <div class="eyebrow">Welcome to hours calculator</div>
     <h1>Work Hours <span class="amp">&amp;</span> Bonus</h1>
-    <p class="subtitle">Click cells to log time. Click a day header to mark it as holidays&mdash; weekends are flagged by default.</p>
+    <p class="subtitle desktop-only">Click cells to log time. Click a day header to mark it as holidays&mdash; weekends are flagged by default.</p>
+    <p class="subtitle mobile-only">Tap a day, then tap or drag through the slots. Star toggles a holiday &mdash; weekends are flagged by default.</p>
   </header>
 
   <div class="totals">
@@ -33,7 +34,8 @@
     </div>
   </div>
 
-  <div class="table-wrap">
+  <!-- DESKTOP VIEW -->
+  <div class="table-wrap desktop-only">
     <table id="hours-table">
       <thead>
         <tr id="header-row"></tr>
@@ -42,7 +44,22 @@
     </table>
   </div>
 
-  <p class="hint">Drag <span class="dot">&middot;</span> Toggle <span class="dot">&middot;</span> Tap day name to flag</p>
+  <!-- MOBILE VIEW -->
+  <div class="mobile-view mobile-only">
+    <div class="day-chips" id="day-chips"></div>
+    <div class="active-day-bar">
+      <div class="active-day-info">
+        <span class="active-day-name" id="active-day-name">Monday</span>
+        <span class="active-day-total"><span id="active-day-hours">0.0</span> hrs</span>
+      </div>
+      <button class="bonus-toggle-mobile" id="bonus-toggle-mobile">
+        <span class="star">&#9733;</span><span>Bonus</span>
+      </button>
+    </div>
+    <div class="mobile-slots" id="mobile-slots"></div>
+  </div>
+
+  <p class="hint desktop-only">Drag <span class="dot">&middot;</span> Toggle <span class="dot">&middot;</span> Tap day name to flag as holiday</p>
 
   <div class="controls">
     <label class="checkbox-wrap">

@@ -130,7 +130,6 @@ h1 .amp {
 /* ---- Desktop Table ---- */
 .table-wrap {
   width: 100%;
-  overflow-x: auto;
   border: 1px solid var(--ink);
   background: var(--bg);
 }
@@ -153,7 +152,9 @@ thead th {
   text-align: center;
   border-right: 1px solid var(--ink-soft);
   cursor: pointer;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 5;
   transition: background 0.15s;
 }
 
@@ -243,7 +244,6 @@ tbody td.slot.bonus-col:hover {
 
 /* ---- Mobile day-view ---- */
 .mobile-view {
-  display: none;
   flex-direction: column;
   width: 100%;
   border: 1px solid var(--ink);
@@ -257,6 +257,9 @@ tbody td.slot.bonus-col:hover {
   background: var(--ink);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .day-chips::-webkit-scrollbar { display: none; }
@@ -365,6 +368,20 @@ tbody td.slot.bonus-col:hover {
   overflow-y: auto;
   user-select: none;
   -webkit-overflow-scrolling: touch;
+  /* Flip scrollbar to the left side */
+  direction: rtl;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) var(--bg-soft);
+}
+
+.mobile-slots::-webkit-scrollbar {
+  width: 6px;
+}
+.mobile-slots::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+.mobile-slots::-webkit-scrollbar-thumb {
+  background: var(--ink);
 }
 
 .mobile-slot {
@@ -379,6 +396,8 @@ tbody td.slot.bonus-col:hover {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   color: var(--ink-soft);
+  /* Restore normal direction inside RTL parent */
+  direction: ltr;
 }
 
 .mobile-slot:nth-child(2n) {
@@ -561,11 +580,16 @@ tbody td.slot.bonus-col:hover {
 
 /* ---- Mobile fine-tuning ---- */
 @media (max-width: 720px) {
-  body { padding: 32px 12px 60px; }
-  .container { gap: 24px; }
+  body { padding: 24px 12px 60px; }
+  .container { gap: 18px; }
 
-  .eyebrow { font-size: 10px; margin-bottom: 10px; }
-  .subtitle { font-size: 13px; }
+  /* Compress mobile: drop the eyebrow, big title, and hint */
+  header .eyebrow,
+  header h1,
+  .hint { display: none; }
+
+  header { margin-bottom: 0; }
+  .subtitle { margin-top: 0; font-size: 13px; }
 
   .totals {
     width: 100%;
