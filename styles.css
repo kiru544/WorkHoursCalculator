@@ -81,7 +81,7 @@ h1 .amp {
 }
 
 .subtitle {
-  margin-top: 16px;
+  margin: 16px auto 0;
   font-size: 14px;
   color: var(--ink-soft);
   max-width: 480px;
