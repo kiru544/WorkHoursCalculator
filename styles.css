@@ -4,8 +4,8 @@
   --ink: #14110d;
   --ink-soft: #4a443a;
   --ink-faint: #8a8278;
-  --line: #d4ccb9;
-  --line-soft: #e2dccb;
+  --line: #b8ad94;
+  --line-soft: #cdc3ac;
   --selected: #14110d;
   --bonus: #9c3a1f;
   --bonus-soft: #f0d9cc;
@@ -204,7 +204,7 @@ tbody td {
 tbody td:last-child { border-right: none; }
 
 tbody tr.hour-mark td {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--accent);
 }
 
 tbody td.time-label {
@@ -220,6 +220,12 @@ tbody td.time-label {
 
 tbody td.time-label.half {
   color: transparent;
+}
+
+/* Hide the half-hour subdivision line in the time column;
+   the orange on-the-hour line (on .half / :30 rows) stays. */
+tbody td.time-label:not(.half) {
+  border-bottom-color: transparent;
 }
 
 tbody td.slot:hover {
@@ -463,7 +469,7 @@ tbody td.slot.bonus-col:hover {
 }
 
 .mobile-slot:nth-child(2n) {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--accent);
 }
 
 .mobile-slot.bonus-col {

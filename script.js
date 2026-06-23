@@ -274,7 +274,7 @@ attachTouchSelection(tbody, 'td.slot', td => ({
   slot: parseInt(td.dataset.slot, 10)
 }));
 
-attachTouchSelection(mobileSlotsContainer, '.mobile-slot', s => ({
+attachTouchSelection(mobileSlotsContainer, '.mobile-slot[data-slot]', s => ({
   day: state.activeDay,
   slot: parseInt(s.dataset.slot, 10)
 }));
@@ -288,7 +288,7 @@ document.addEventListener('touchend', () => {
 // touchstart already toggles, so we don't need an extra click handler.
 // But add a fallback click handler for non-touch mobile (rare) / accessibility.
 mobileSlotsContainer.addEventListener('click', e => {
-  const target = e.target.closest('.mobile-slot');
+  const target = e.target.closest('.mobile-slot[data-slot]');
   if (!target) return;
   // If a touch already handled it, the state is already updated. Detect by
   // checking whether this click was synthesized from touch (best-effort skip).
@@ -369,9 +369,9 @@ saveBtn.addEventListener('click', async () => {
 
   lines.push('TOTALS');
   lines.push('-----------------------------------');
-  lines.push(`Weekday hours : ${weekday.toFixed(1)}`);
-  lines.push(`Bonus hours   : ${bonus.toFixed(1)}`);
-  lines.push(`Grand total   : ${(weekday + bonus).toFixed(1)}`);
+  lines.push(`Ordinary hours : ${weekday.toFixed(1)}`);
+  lines.push(`Overtime hours : ${bonus.toFixed(1)}`);
+  lines.push(`Grand total    : ${(weekday + bonus).toFixed(1)}`);
   lines.push('');
   lines.push('===================================');
 
